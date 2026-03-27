@@ -1,0 +1,54 @@
+version: v1
+
+components:
+  - name: rustfs
+    docker:
+      image: rustfs/rustfs:latest
+    user: 10001
+    ports:
+      - 9000
+      - 9001
+    ingresses:
+      - host: s3
+        path: /
+        port: 9000
+      - host: console
+        path: /
+        port: 9001
+    env:
+      - name: RUSTFS_VOLUMES
+        value: "/data/rustfs{0...1}"
+      - name: RUSTFS_ADDRESS
+        value: "0.0.0.0:9000"
+      - name: RUSTFS_CONSOLE_ADDRESS
+        value: "0.0.0.0:9001"
+      - name: RUSTFS_CONSOLE_ENABLE
+        value: "true"
+      - name: RUSTFS_CORS_ALLOWED_ORIGINS
+        value: "*"
+      - name: RUSTFS_CONSOLE_CORS_ALLOWED_ORIGINS
+        value: "*"
+      - name: RUSTFS_ACCESS_KEY
+        config-ref: rustfs_access_key
+        value: "rustfsadmin"
+      - name: RUSTFS_SECRET_KEY
+        config-ref: rustfs_secret_key
+        value: "rustfsadmin"
+      - name: RUSTFS_OBS_LOGGER_LEVEL
+        value: "info"
+      - name: RUSTFS_TLS_PATH
+        value: "/opt/tls"
+      - name: RUSTFS_OBJECT_CACHE_ENABLE
+        value: "true"
+      - name: RUSTFS_OBJECT_CACHE_TTL_SECS
+        value: "300"
+    storage:
+      - name: rustfs-data-0
+        path: /data/rustfs0
+        size: 100Mi
+      - name: rustfs-data-1
+        path: /data/rustfs1
+        size: 100Mi
+      - name: logs
+        path: /app/logs
+        size: 1Gi
