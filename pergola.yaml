@@ -30,10 +30,8 @@ components:
         value: "*"
       - name: RUSTFS_ACCESS_KEY
         config-ref: rustfs_access_key
-        value: "rustfsadmin"
       - name: RUSTFS_SECRET_KEY
         config-ref: rustfs_secret_key
-        value: "rustfsadmin"
       - name: RUSTFS_OBS_LOGGER_LEVEL
         value: "info"
       - name: RUSTFS_TLS_PATH
