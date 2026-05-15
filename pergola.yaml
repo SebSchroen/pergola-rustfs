@@ -34,8 +34,6 @@ components:
         config-ref: rustfs_secret_key
       - name: RUSTFS_OBS_LOGGER_LEVEL
         value: "info"
-      - name: RUSTFS_TLS_PATH
-        value: "/opt/tls"
       - name: RUSTFS_OBJECT_CACHE_ENABLE
         value: "true"
       - name: RUSTFS_OBJECT_CACHE_TTL_SECS
